@@ -43,7 +43,7 @@
                                 <div class="card-content collapse show">
                                     <div class="card-body">
                                         <form class="form" action="{{ route('update.shippings.methods', $shippingMethod -> id) }}"
-                                              method="PUT"
+                                              method="post"
                                               enctype="multipart/form-data">
                                             @csrf
                                             @method('PUT')
@@ -52,30 +52,34 @@
 
                                             <div class="form-body">
                                                 <h4 class="form-section"><i class="ft-home"></i> بيانات التوصيل </h4>
+
                                                 <div class="row">
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم </label>
-                                                            <input type="text" value="{{ $shippingMethod -> value }}" id="name"
+                                                            <input type="text" value="{{ $shippingMethod -> value }}" id="value"
                                                                    class="form-control"
                                                                    placeholder="  "
-                                                                   name="name">
-                                                            @error("name")
+                                                                   name="value">
+                                                            @error("value")
                                                             <span class="text-danger">{{$message}}</span>
                                                             @enderror
                                                         </div>
                                                     </div>
 
-
+                                                    <div class="col-md-6">
+                                                        <div class="form-group">
+                                                            <label for="projectinput1"> قيمة التوصيل </label>
+                                                            <input type="number" value="{{ $shippingMethod->plain_value }}" id="plain_value"
+                                                                   class="form-control"
+                                                                   placeholder=""
+                                                                   name="plain_value">
+                                                            @error("plain_value")
+                                                                <span class="text-danger">{{$message}}</span>
+                                                            @enderror
+                                                        </div>
+                                                    </div>
                                                 </div>
-
-
-
-
-                                            </div>
-
-
-                                            <div id="map" style="height: 500px;width: 1000px;"></div>
 
                                             <div class="form-actions">
                                                 <button type="button" class="btn btn-warning mr-1"
@@ -83,7 +87,7 @@
                                                     <i class="ft-x"></i> تراجع
                                                 </button>
                                                 <button type="submit" class="btn btn-primary">
-                                                    <i class="la la-check-square-o"></i> حفظ
+                                                    <i class="la la-check-square-o"></i> تحديث
                                                 </button>
                                             </div>
                                         </form>
