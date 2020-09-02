@@ -27,26 +27,55 @@
                     <li class="nav-item d-none d-md-block"><a class="nav-link nav-link-expand" href="#"><i
                                 class="ficon ft-maximize"></i></a></li>
                 </ul>
+
                 <ul class="nav navbar-nav float-right">
                     <li class="dropdown dropdown-user nav-item">
                         <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
-                <span class="mr-1">مرجبا
-                  <span
-                      class="user-name text-bold-700">  Ahmed Emam</span>
-                </span>
-                            <span class="avatar avatar-online">
-                  <img  style="height: 35px;" src="" alt="avatar"><i></i></span>
+                            <span class="mr-1">مرحبا
+                                <span class="user-name text-bold-700"> {{ auth('admin')->user()->name }}</span>
+                            </span>
+                           <span class="avatar avatar-online">
+                                 <img  style="height: 35px;" src="{{asset('assets/admin/images/2025.jpg')}}" alt="avatar"><i></i>
+                             </span>
                         </a>
-                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href=""><i
+
+                        <div class="dropdown-menu dropdown-menu-right"><a class="dropdown-item" href="{{route('edit.profile')}}"><i
                                     class="ft-user"></i> تعديل الملف الشحصي </a>
                             <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href=""><i class="ft-power"></i> تسجيل
+                            <a class="dropdown-item" href="{{ route('admin.logout') }}"><i class="ft-power"></i> تسجيل
                                 الخروج </a>
                         </div>
                     </li>
 
-                    <li class="dropdown dropdown-notification nav-item">
-                        <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon ft-bell"></i>
+                    <li class="dropdown dropdown-user nav-item">
+                        <a class="dropdown-toggle nav-link dropdown-user-link" href="#" data-toggle="dropdown">
+                            <span class="mr-1">
+                                <span class="user-name text-bold-700"> {{ app()->getLocale() }}</span>
+                            </span>
+
+                        </a>
+
+                        <div class="dropdown-menu dropdown-menu-right">
+
+
+                            @foreach(LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                                <a class="dropdown-item" rel="alternate" hreflang="{{ $localeCode }}"
+                                   href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                                    <i class="ft ft-check"></i>
+                                    {{ $properties['native'] }}
+                                </a>
+
+                                @if(!$loop->last)
+                                    <div class="dropdown-divider"></div>
+                                @endif
+
+                            @endforeach
+                        </div>
+                    </li>
+
+                     <li class="dropdown dropdown-notification nav-item">
+                        <a class="nav-link nav-link-label" href="#  " data-toggle="dropdown"><i
+                                class="ficon ft-bell"></i>
                             <span class="badge badge-pill badge-default badge-danger badge-default badge-up badge-glow">5</span>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
@@ -232,6 +261,7 @@
                         </ul>
                     </li>
                 </ul>
+
             </div>
         </div>
     </div>
