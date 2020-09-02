@@ -32,11 +32,7 @@ class SettingsController extends Controller
 
     }
 
-    /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
+
     public function updateShippingMethods( ShippingsRequest $request, $id)
     {
         try {

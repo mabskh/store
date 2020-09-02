@@ -21,5 +21,10 @@ class ShippingsRequest extends FormRequest
         ];
     }
 
+    public function messages()
+    {
+
+    }
+
 
 }
