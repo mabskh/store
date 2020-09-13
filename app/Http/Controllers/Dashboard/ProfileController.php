@@ -34,7 +34,7 @@ class ProfileController extends Controller
             return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
 
         } catch (\Exception $ex) {
-            return redirect()->back()->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
+            return redirect()->back()->with(['error' => 'يجب تعبئة جميع الحقول']);
         }
     }
 }

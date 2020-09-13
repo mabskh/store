@@ -51,7 +51,7 @@
     <!-- BEGIN Custom CSS-->
     <link rel="stylesheet" type="text/css" href="{{asset('assets/admin/'.getFolder().'/style-rtl.css')}}">
     <!-- END Custom CSS-->
-    @notify_css
+   {{-- @notify_css--}}
     @yield('style')
     <link href="https://fonts.googleapis.com/css?family=Cairo&display=swap" rel="stylesheet">
     <style>
@@ -60,7 +60,7 @@
         }
     </style>
 </head>
-<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar"
+<body class="vertical-layout vertical-menu 2-columns menu-expanded fixed-navbar "
       data-open="click" data-menu="vertical-menu" data-col="2-columns">
 <!-- fixed-top-->
 @include('dashboard.includes.header')
@@ -68,12 +68,13 @@
 @include('dashboard.includes.sidebar')
 
 @yield('content')
+
 <!-- ////////////////////////////////////////////////////////////////////////////-->
 @include('dashboard.includes.footer')
 
-@notify_js
-@notify_render
-
+{{--@notify_js
+@notify_render--}}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <!-- BEGIN VENDOR JS-->
 <script src="{{asset('assets/admin/vendors/js/vendors.min.js')}}" type="text/javascript"></script>
 <!-- BEGIN VENDOR JS-->
