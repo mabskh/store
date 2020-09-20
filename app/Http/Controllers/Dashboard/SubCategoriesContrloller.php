@@ -3,10 +3,9 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\MainCategoryRequest;
 use App\Http\Requests\SubCategoryRequest;
 use App\Models\Category;
-use Illuminate\Support\Facades\DB;
+use Exception;
 
 
 class SubCategoriesContrloller extends Controller
@@ -15,14 +14,13 @@ class SubCategoriesContrloller extends Controller
     {
         // PAGINATION_COUNT -> Constant Defined In general Helper File
         $categories = Category::child()->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
-
         return view('dashboard.subcategories.index', compact('categories'));
     }
 
     public function create()
     {
         $categories = Category::parent()->orderBy('id', 'DESC')->get();
-        return view('dashboard.subcategories.create',compact('categories'));
+        return view('dashboard.subcategories.create', compact('categories'));
     }
 
     public function edit($id)
@@ -35,38 +33,45 @@ class SubCategoriesContrloller extends Controller
 
         $categories = Category::parent()->orderBy('id', 'DESC')->get();
 
-        return view('dashboard.subcategories.edit', compact('category','categories'));
+        return view('dashboard.subcategories.edit', compact('category', 'categories'));
     }
 
-    public function store(SubCategoryRequest  $request)
+    public function store(SubCategoryRequest $request)
     {
 
         try {
 
-            if(!$request->has('is_active'))
+            if (!$request->has('is_active'))
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
 
+            $fileName = "";
+            if ($request->has('photo')) {
+                $fileName = uploadImage('subcategories', $request->photo);
+            }
+
             $category = new Category([
-                'is_active'    =>  $request->get('is_active'),
-                'parent_id'    =>  $request->get('parent_id'),
-                'slug'     =>  $request->get('slug')
+                'is_active' => $request->get('is_active'),
+                'parent_id' => $request->get('parent_id'),
+                'slug' => $request->get('slug')
             ]);
 
+
             $category->name = $request->name;
+            $category->photo = $fileName;
             $category->save();
 
             return redirect()->route('admin.subcategories')->with(['success' => 'تمت الاضافة بنجاح']);
 
-        }catch (\Exception $ex){
+        } catch (Exception $ex) {
 
-            return redirect()->back()->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
+            return redirect()->route('admin.maincategories')->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
 
         }
     }
 
-    public function update(SubCategoryRequest  $request, $id)
+    public function update(SubCategoryRequest $request, $id)
     {
         try {
 
@@ -75,10 +80,19 @@ class SubCategoriesContrloller extends Controller
             if (!$subCategory)
                 return redirect()->route('admin.subcategories')->with(['error' => 'هذا القسم غير موجود ']);
 
+
             if (!$request->has('is_active'))
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
+
+
+            if( $request->has('photo')){
+                $fileName = uploadImage('subcategories', $request->photo);
+                Category::where('id' , $id)->update([
+                    'photo' => $fileName
+                ]);
+            }
 
             //$request['slug'] = Category::createSlug($request->name);
             $subCategory->update($request->all());
@@ -87,9 +101,9 @@ class SubCategoriesContrloller extends Controller
             $subCategory->name = $request->name;
             $subCategory->save();
 
-            return redirect()->back()->with(['success' => 'تم التحديث بنجاح']);
-        } catch (\Exception $ex) {
-            return redirect()->back()->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
+            return redirect()->route('admin.subcategories')->with(['success' => 'تم التحديث بنجاح']);
+        } catch (Exception $ex) {
+            return redirect()->route('admin.maincategories')->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
         }
     }
 
@@ -104,9 +118,9 @@ class SubCategoriesContrloller extends Controller
             $status = $category->is_active == 0 ? 1 : 0;
 
             $category->update(['is_active' => $status]);
-            return redirect()->back()->with(['success' => 'تم تغيير حالة القسم بنجاح ']);
+            return redirect()->route('admin.maincategories')->with(['success' => 'تم تغيير حالة القسم بنجاح ']);
 
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             return redirect()->route('admin.maincategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }
@@ -120,14 +134,14 @@ class SubCategoriesContrloller extends Controller
     public function destroy($id)
     {
         try {
-            $subCategory = Category::orderBy('id','DESC')->find($id);
+            $subCategory = Category::orderBy('id', 'DESC')->find($id);
             if (!$subCategory)
                 return redirect()->route('admin.subcategories')->with(['error' => 'هذا القسم غير موجود ']);
 
             $subCategory->delete();
 
             return redirect()->route('admin.subcategories')->with(['success' => 'تم الحذف بنجاح ']);
-        } catch (\Exception $ex) {
+        } catch (Exception $ex) {
             return redirect()->route('admin.subcategories')->with(['error' => 'حدث خطا ما برجاء المحاوله لاحقا']);
         }
     }

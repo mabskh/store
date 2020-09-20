@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\MainCategoryRequest;
+use App\Models\Brand;
 use App\Models\Category;
 use Illuminate\Support\Facades\DB;
 
@@ -14,7 +15,8 @@ class MainCategoriesContrloller extends Controller
     {
         // PAGINATION_COUNT -> Constant Defined In general Helper File
         // parent() -> Scope in Model defined if Statement
-        $categories = Category::parent()->orderBy('id', 'DESC')->paginate(PAGINATION_COUNT);
+        $categories = Category::parent()->orderBy('id', 'desc')->paginate(PAGINATION_COUNT);
+
         return view('dashboard.categories.index', compact('categories'));
     }
 
@@ -38,24 +40,31 @@ class MainCategoriesContrloller extends Controller
     {
 
         try {
-
+            DB::beginTransaction();
             if(!$request->has('is_active'))
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
 
+            $fileName ="";
+            if($request->has('photo')){
+                $fileName = uploadImage('categories', $request->photo);
+            }
+
             $category = new Category([
                 'is_active'    =>  $request->get('is_active'),
-                'slug'     =>  $request->get('slug')
+                'slug'     =>  $request->get('slug'),
             ]);
 
             $category->name = $request->name;
+            $category->photo = $fileName;
             $category->save();
 
+            DB::commit();
             return redirect()->route('admin.maincategories')->with(['success' => 'تمت الاضافة بنجاح']);
 
         }catch (\Exception $ex){
-
+         DB::rollBack();
             return redirect()->back()->with(['error' => 'هناك خطأ ما يرجى المحاولة فيما بعد']);
 
         }
@@ -74,6 +83,13 @@ class MainCategoriesContrloller extends Controller
                 $request->request->add(['is_active' => 0]);
             else
                 $request->request->add(['is_active' => 1]);
+
+            if( $request->has('photo')){
+                $fileName = uploadImage('categories', $request->photo);
+                Category::where('id' , $id)->update([
+                    'photo' => $fileName
+                ]);
+            }
 
             //$request['slug'] = Category::createSlug($request->name);
             $category->update($request->all());

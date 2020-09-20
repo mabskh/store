@@ -81,6 +81,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
                                                     <div class="col-md-6">
                                                         <div class="form-group">
                                                             <label for="projectinput1"> الاسم بالرابط </label>
@@ -94,6 +95,7 @@
                                                             @enderror
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="row">

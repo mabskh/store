@@ -23,12 +23,9 @@ class Category extends Model
         'is_active' => 'boolean',
     ];
 
-    public static function create(array $except)
+    public function _parent()
     {
-    }
-
-    public static function inRandomOrder()
-    {
+        return $this-> belongsTo(self::class,'parent_id');
     }
 
     public function scopeParent($query)
@@ -51,6 +48,12 @@ class Category extends Model
         return $this->is_active == 1 ? 'مفعل' : 'غير مفعل';
     }
 
+   /* public function getPhotoAttribute($val)
+    {
+        return ($val !== null) ? asset('assets/images/categories/' . $val) : '' ;
+    }
+    */
+
     public static function createSlug($string) {
 
         $table = array(
@@ -71,6 +74,8 @@ class Category extends Model
         return strtolower(strtr($string, $table));
 
     }
+
+
 
 
 

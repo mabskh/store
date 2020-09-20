@@ -55,6 +55,34 @@ return [
             'visibility' => 'public',
         ],
 
+        'brands' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/brands'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'categories' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/categories'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'subcategories' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/subcategories'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
+        'profiles' => [
+            'driver' => 'local',
+            'root' => public_path('assets/images/profiles'),
+            'url' => env('APP_URL').'/storage',
+            'visibility' => 'public',
+        ],
+
         's3' => [
             'driver' => 's3',
             'key' => env('AWS_ACCESS_KEY_ID'),
