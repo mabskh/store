@@ -27,6 +27,7 @@ class MainCategoryRequest extends FormRequest
     public function rules()
     {
         $rules = [
+           // 'parent_id' => 'required|exists:categories,id',
             'name' => 'required',
             'slug' => 'required|unique:categories,slug,'.$this->id
         ];

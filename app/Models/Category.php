@@ -28,7 +28,13 @@ class Category extends Model
         return $this-> belongsTo(self::class,'parent_id');
     }
 
-    public function scopeParent($query)
+    public function childs()
+    {
+        return $this-> hasMany(self::class,'parent_id');
+    }
+
+
+     public function scopeParent($query)
     {
         return $query->whereNull('parent_id');
     }

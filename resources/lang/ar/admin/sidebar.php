@@ -8,6 +8,7 @@ return [
     'sub_categories' => 'الأقسام الفرعية',
     'brands' => 'الماركات التجارية',
     'tags' => ' Tags العلامات ',
+    'products' => ' المنتجات ',
 
     'categories_list' => 'عرض جميع الأقسام',
     'categories_active' => 'الأقسام المفعلة',
@@ -21,6 +22,8 @@ return [
 
     'tags_list' => 'عرض جميع العلامات ',
     'tags_active' => 'العلامات المفعلة',
+
+    'products_list' => 'عرض جميع المنتجات',
 
 
     'shipping methods' => 'وسائل التوصيل',

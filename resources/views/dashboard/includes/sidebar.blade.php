@@ -9,6 +9,30 @@
                 </a>
             </li>
 
+            {{--<li class="nav-item">
+                <a href="{{ route('admin.categories') }}">
+                    <i class="la la-th-list"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main">القديمةالأقسام</span>
+                    <span class="badge badge badge-danger badge-pill float-right mr-2"> {{ \App\Models\Category::count() }}</span>
+                </a>
+
+                <ul class="menu-content">
+                    <li class="menu-item">
+
+                        <a class="menu-item" href="{{ route('admin.categories') }}" data-i18n="nav.dash.ecommerce">  <span>جميع الاقسام</span>
+                            <span class="badge badge badge-info badge-pill float-right mr-2"> {{ \App\Models\Category::count() }}</span>
+                        </a>
+                    </li>
+
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.categories.create') }}" data-i18n="nav.dash.ecommerce">اضافة قسم جديد
+                            --}}{{--<span class="badge badge badge-primary badge-pill float-right mr-2"> جديد</span>--}}{{--
+                        </a>
+                    </li>
+
+                </ul>
+            </li>--}}
+
             <li class="nav-item">
                 <a href="{{ route('admin.categories') }}">
                     <i class="la la-th-list"></i>
@@ -145,6 +169,97 @@
                     <li class="menu-item">
                         <a class="menu-item" href="{{ route('admin.tags.create') }}" data-i18n="nav.dash.ecommerce"> {{__('admin/sidebar.add_new')}}
                             <span class="badge badge badge-primary badge-pill float-right mr-2"> Tag</span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.products') }}">
+                    <i class="la la-tags"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> {{__('admin/sidebar.products')}} </span>
+                    <span class="badge badge badge-danger badge-pill float-right mr-2"> {{ \App\Models\Product::count() }}</span>
+                </a>
+
+
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.products') }}" data-i18n="nav.dash.ecommerce">{{__('admin/sidebar.products_list')}}
+                            <span class="badge badge badge-info badge-pill float-right mr-2"> {{ \App\Models\Product::count() }}</span>
+                        </a>
+                    </li>
+
+                 {{--   <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.brands.active') }}" data-i18n="nav.dash.ecommerce"> العلامات المفعلة
+                            <span class="badge badge badge-success badge-pill float-right mr-2"> {{ \App\Models\Brand::where('is_active',1)->count() }}</span>
+                        </a>
+                    </li>--}}
+
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.products.general.create') }}" data-i18n="nav.dash.ecommerce"> {{__('admin/sidebar.add_new')}}
+                            <span class="badge badge badge-primary badge-pill float-right mr-2">منتج </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.attributes') }}">
+                    <i class="la la-tags"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> خصائثص المنتج </span>
+                    {{--<span class="badge badge badge-danger badge-pill float-right mr-2"> </span>--}}
+                </a>
+
+
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.attributes') }}" data-i18n="nav.dash.ecommerce">عرض الخصائص
+                            <span class="badge badge badge-info badge-pill float-right mr-2"> {{ App\Models\Attribute::count() }} </span>
+                        </a>
+                    </li>
+
+                    {{--   <li class="menu-item">
+                           <a class="menu-item" href="{{ route('admin.brands.active') }}" data-i18n="nav.dash.ecommerce"> العلامات المفعلة
+                               <span class="badge badge badge-success badge-pill float-right mr-2"> {{ \App\Models\Brand::where('is_active',1)->count() }}</span>
+                           </a>
+                       </li>--}}
+
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.attributes.create') }}" data-i18n="nav.dash.ecommerce"> اضافة خاصية
+                            <span class="badge badge badge-primary badge-pill float-right mr-2"> </span>
+                        </a>
+                    </li>
+
+                </ul>
+            </li>
+
+            <li class="nav-item">
+                <a href="{{ route('admin.options') }}">
+                    <i class="la la-tags"></i>
+                    <span class="menu-title" data-i18n="nav.dash.main"> تفاصيل الخصائص </span>
+                   {{-- <span class="badge badge badge-danger badge-pill float-right mr-2"> </span>--}}
+                </a>
+
+
+                <ul class="menu-content">
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.options') }}" data-i18n="nav.dash.ecommerce">تفاصيل الخصائص
+                            <span class="badge badge badge-info badge-pill float-right mr-2"> {{ App\Models\Option::count() }} </span>
+                        </a>
+                    </li>
+
+                    {{--   <li class="menu-item">
+                           <a class="menu-item" href="{{ route('admin.brands.active') }}" data-i18n="nav.dash.ecommerce"> العلامات المفعلة
+                               <span class="badge badge badge-success badge-pill float-right mr-2"> {{ \App\Models\Brand::where('is_active',1)->count() }}</span>
+                           </a>
+                       </li>--}}
+
+                    <li class="menu-item">
+                        <a class="menu-item" href="{{ route('admin.options.create') }}" data-i18n="nav.dash.ecommerce"> اضافة تفاصيل
+
+                          {{--  <span class="badge badge badge-primary badge-pill float-right mr-2"> </span>--}}
                         </a>
                     </li>
 

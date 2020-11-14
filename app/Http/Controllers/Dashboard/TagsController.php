@@ -107,7 +107,7 @@ class TagsController extends Controller
             $tag = Tag::find($id);
             if (!$tag)
                 return redirect()->route('admin.tags')->with(['error' => 'هذا القسم غير موجود ']);
-
+            $tag->translations()->delete();
             $tag->delete();
 
             return redirect()->route('admin.tags')->with(['success' => 'تم الحذف بنجاح ']);

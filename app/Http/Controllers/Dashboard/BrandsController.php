@@ -135,6 +135,7 @@ class BrandsController extends Controller
             if (!$brand)
                 return redirect()->route('admin.brands')->with(['error' => 'هذا القسم غير موجود ']);
 
+            $brand->translations()->delete();
             $brand->delete();
 
             return redirect()->route('admin.brands')->with(['success' => 'تم الحذف بنجاح ']);

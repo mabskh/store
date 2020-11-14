@@ -35,7 +35,7 @@
                                 <span class="user-name text-bold-700"> {{ auth('admin')->user()->name }}</span>
                             </span>
                            <span class="avatar avatar-online">
-                                 <img  style="height: 35px;" src="{{asset('assets/admin/images/2025.jpg')}}" alt="avatar"><i></i>
+                                 <img  style="height: 35px;" src="{{asset('assets/admin/images/2020.jpg')}}" alt="avatar"><i></i>
                              </span>
                         </a>
 

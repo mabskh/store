@@ -8,6 +8,7 @@ return [
     'sub_categories' => 'Sub Categories',
     'brands' => 'Brands',
     'tags' => 'Tags',
+    'products' => 'Products',
 
 
     'categories_list' => 'Categories List',
@@ -22,6 +23,9 @@ return [
 
     'tags_list' => 'Brands List',
     'tags_active' => 'Active Tags',
+
+    'products_list' => 'Products List',
+
 
 
 

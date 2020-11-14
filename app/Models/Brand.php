@@ -15,10 +15,6 @@ class Brand extends Model
         'is_active' => 'boolean',
     ];
 
-    public static function create(array $except)
-    {
-    }
-
     public function getActive()
     {
         return $this->is_active == 1 ? 'مفعل' : 'غير مفعل';
